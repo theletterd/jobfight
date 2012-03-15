@@ -1,7 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
           "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-  <head>
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}base.css" />
+
+<head>
     <title>
       {% block title %}
       Jobfight
@@ -9,7 +11,7 @@
     </title>
   </head>
 
-  <body style="padding-top: 60px">
+  <body>
     <div class="topbar">
       <div class="topbar-inner">
 	<div class="container-fluid">
@@ -38,6 +40,6 @@
 
     <div class="container">
 	  {% block content %}{% endblock %}
-    </div>
+   </div>
   </body>
 </html>
