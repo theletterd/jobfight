@@ -1,5 +1,61 @@
 [
   {
+    "model": "reporting.status",
+    "pk": 1,
+    "fields": {
+      "name": "Contacted"
+    }
+  },
+  {
+    "model": "reporting.status",
+    "pk": 2,
+    "fields": {
+      "name": "Prescreened"
+    }
+  },
+  {
+    "model": "reporting.status",
+    "pk": 3,
+    "fields": {
+      "name": "Sourced"
+    }
+  },
+  {
+    "model": "reporting.status",
+    "pk": 4,
+    "fields": {
+      "name": "SPIs"
+    }
+  },
+  {
+    "model": "reporting.status",
+    "pk": 5,
+    "fields": {
+      "name": "OSs"
+    }
+  },
+  {
+    "model": "reporting.status",
+    "pk": 6,
+    "fields": {
+      "name": "Offers Extended"
+    }
+  },
+  {
+    "model": "reporting.status",
+    "pk": 7,
+    "fields": {
+      "name": "Offers Accepted"
+    }
+  },
+  {
+    "model": "reporting.status",
+    "pk": 8,
+    "fields": {
+      "name": "Rejected"
+    }
+  },
+  {
     "model": "reporting.requisition",
     "pk": 1,
     "fields": {
