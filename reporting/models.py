@@ -2,9 +2,29 @@ from django.db import models
 from django.contrib.auth.models import User
 
 REQ_TYPE = (
-        (0, 'Intern'),
-        (1, 'Developer'),
-        (2, 'PM'),
+    (0, "Engineeering"),
+    (1, "New Grad"),
+    (2, "Summer Intern"),
+    (3, "Back-end"),
+    (4, "Eng Manager"),
+    (5, "Mobile"),
+    (6, "Search"),
+    (7, "Ads/Revenue"),
+    (8, "Front-end"),
+    (9, "Web Dev"),
+    (10, "Product/Design"),
+    (11, "PM - Consumer"),
+    (12, "PM - Local Business"),
+    (13, "PM - International"),
+    (14, "PM - New Grad"),
+    (15, "PM Intern Summer"),
+    (16, "UI Designer"),
+    (17, "UI Designer - New Grad"),
+    (18, "UI Designer Intern"),
+    (19, "Systems/IT"),
+    (20, "Sys Infra Developer"),
+    (21, "Release Eng"),
+    (22, "Sys Admin (Corp)"),
 )
 
 class Status(models.Model):
