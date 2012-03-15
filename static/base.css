@@ -1,3 +1,41 @@
+body div {
+	margin: 10px 0;
+}
+
+div#headliner{
+	display: inline;
+}
+
+#headliner a img {
+	border: 0px;
+	height: 100;
+}
+
+div#account {
+	float: right;
+}
+
 body {
-	background: url("/static/images/duncan.png") no-repeat fixed right bottom #FFFFFF;
+	background: url("/static/images/duncan.png") no-repeat fixed right bottom #666;
+	font-family: 'Armata', sans-serif;
+	padding: 10px 30px;
+}
+
+div.my-summary {
+	background-color: #c3ccdd;
+	width: 700px;
+}
+
+div.my-summary td {
+	font-size: 80px;
+	text-align: center;
+	color: #666;
+	width: 200px;
+}
+
+div.my-summary th {
+	font-size: 80px;
+	text-align: center;
+	color: #666;
+	font-size: 20px;
 }

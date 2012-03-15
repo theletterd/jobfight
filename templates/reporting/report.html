@@ -2,7 +2,31 @@
 
 {% block content %}
 
-    <div> {{user.username}}</div>
-    <div> this is where a report might go.</div>
+	<div class="my-summary">
+	  <table>
+		<tr>
+		  <th>my stats</th>
+		  <td>15</td>
+		  <td>12</td>
+		  <td>9</td>
+		  <td>4</td>
+		  <td>1</td>
+		  <td>1</td>
+		</tr>
+	  </table>
+	</div>
+
+	<div class="my-board">
+	</div>
+	
+	<div id="req">
+	  see by requisition [<a id="see-by-req" href="#">+</a>]
+	</div>
+
+	<div class="req-board">
+	</div>
+	
+	<div class="team-board">
+	</div>
 
 {% endblock content %}

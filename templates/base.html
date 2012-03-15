@@ -1,39 +1,33 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
           "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}base.css" />
 
 <head>
-    <title>
-      {% block title %}
-      Jobfight
-      {% endblock %}
-    </title>
-  </head>
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}base.css" />
+  <link href='http://fonts.googleapis.com/css?family=Armata'' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}reporting.js"></script>
+  <title>jobfight</title>
+</head>
 
   <body>
+   <div id="headliner">
+      <a href="{% url home %}"><img src="{{ STATIC_URL }}Headliner.png"></a>
+    </div>
+    <div id="account">
+      {% if user.is_authenticated %}
+        {{ user.username }} |
+        <a href="{% url auth_logout %}">Logout</a>
+      {% else %}
+        {% url auth_login as url_auth_login %}
+        <a href="{{ url_auth_login }}">Login</a>
+      {% endif %}
+    </div>
+
     <div class="topbar">
       <div class="topbar-inner">
 	<div class="container-fluid">
-	  <a class="brand" href="{% url home %}">
-	    Jobfight
-	  </a>
 
-	  <ul class="nav secondary-nav">
-              {% if user.is_authenticated %}
-	        <li>
-		  <p>
-		    ( Logged in as {{ user.username }} )
-		  </p>
-		</li>
-	        <li><a href="{% url auth_logout %}">Logout</a></li>
-              {% else %}
-	        {% url auth_login as url_auth_login %}
-                <li>
-		  <a href="{{ url_auth_login }}">Login</a>
-		</li>
-	      {% endif %}
-	  </ul>
 	</div>
       </div>
     </div>
