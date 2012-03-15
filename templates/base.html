@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+          "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>
+      {% block title %}
+      Jobfight
+      {% endblock %}
+    </title>
+  </head>
+
+  <body style="padding-top: 60px">
+    <div class="topbar">
+      <div class="topbar-inner">
+	<div class="container-fluid">
+	  <a class="brand" href="{% url home %}">
+	    Jobfight
+	  </a>
+
+	  <ul class="nav secondary-nav">
+              {% if user.is_authenticated %}
+	        <li>
+		  <p>
+		    ( Logged in as {{ user.username }} )
+		  </p>
+		</li>
+	        <li><a href="{% url auth_logout %}">Logout</a></li>
+              {% else %}
+	        {% url auth_login as url_auth_login %}
+                <li>
+		  <a href="{{ url_auth_login }}">Login</a>
+		</li>
+	      {% endif %}
+	  </ul>
+	</div>
+      </div>
+    </div>
+
+    <div class="container">
+	  {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
