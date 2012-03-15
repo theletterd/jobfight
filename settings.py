@@ -154,3 +154,4 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
 LOGOUT_URL = '/logout'
 
+AUTH_PROFILE_MODULE = 'reporting.UserProfile'

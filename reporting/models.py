@@ -28,4 +28,4 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
 
     def __unicode__(self):
-        return self.user.name
+        return self.user.username

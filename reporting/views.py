@@ -55,14 +55,14 @@ def add_status_value(request):
     template = 'reporting/add_status_value.html'
 
     if request.method == "GET":
-        status_value_form = StatusValueForm()
+        status_value_form = StatusValueForm(request.user)
         return render_to_response(
             template,
             dict(form=status_value_form),
             context_instance=RequestContext(request)
         )
     elif request.method == "POST":
-        status_value_form = StatusValueForm(request.POST)
+        status_value_form = StatusValueForm(request.user, request.POST)
         if not status_value_form.errors:
             status_value = status_value_form.save(commit=False)
             status_value.user = request.user
