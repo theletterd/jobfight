@@ -1,13 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
+from django.shortcuts import redirect
 from django.template import RequestContext
+from forms import StatusValueForm
 
 from reporting import models
 
 def home(request):
     return render_to_response(
         'reporting/homepage.html',
-        dict(message='butts'),
+        dict(message='Dingleberries!'),
         context_instance=RequestContext(request)
     )
 
@@ -29,3 +31,31 @@ def report(request):
         ),
         context_instance=RequestContext(request)
     )
+
+
+@login_required
+def add_status_value(request):
+
+    template = 'reporting/add_status_value.html'
+
+    if request.method == "GET":
+        status_value_form = StatusValueForm()
+        return render_to_response(
+            template,
+            dict(form=status_value_form),
+            context_instance=RequestContext(request)
+        )
+    elif request.method == "POST":
+        status_value_form = StatusValueForm(request.POST)
+        if not status_value_form.errors:
+            status_value = status_value_form.save(commit=False)
+            status_value.user = request.user
+            status_value.save()
+
+            return redirect('/reporting/report')
+        else:
+            return render_to_response(
+                template,
+                dict(form=status_value_form),
+                context_instance=RequestContext(request)
+            )

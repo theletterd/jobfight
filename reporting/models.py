@@ -21,8 +21,7 @@ class StatusValue(models.Model):
     value = models.IntegerField()
 
     def __unicode__(self):
-        nice_date = self.date
-        return '%s - %s %s - %s' % (self.user.username, self.status.name, self.value, self.date.strftime('%Y-%m-%d'))
+        return '%s - %s %s %s - %s' % (self.user.username, self.status.name, self.value, self.req.name, self.date.strftime('%Y-%m-%d'))
 
 class UserProfile(models.Model):
     requisitions = models.ManyToManyField(Requisition, related_name="requisitions")
