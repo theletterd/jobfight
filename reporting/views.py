@@ -19,7 +19,7 @@ def home(request):
 
 @login_required
 def report(request):
-    #user = request.user
+    user = request.user
     users = User.objects.all()
 
     statuses = models.Status.objects.all().order_by("name")
@@ -33,9 +33,12 @@ def report(request):
 
     status_values_by_user = {}
     user_status_matrix = defaultdict(partial(defaultdict, int))
+    req_status_matrix = defaultdict(partial(defaultdict, int))
     for status_value in status_values:
         status_values_by_user.setdefault(status_value.user, []).append(status_value)
         user_status_matrix[status_value.user][status_value.status] += 1
+        if status_value.user.id == user.id:
+            req_status_matrix[status_value.req][status_value.status] += 1
 
     return render_to_response(
         'reporting/report.html',
@@ -43,6 +46,7 @@ def report(request):
 			users=users,
             statuses=statuses,
             user_status_matrix=user_status_matrix,
+            req_status_matrix=req_status_matrix,
             status_values_by_user=status_values_by_user,
             status_values_by_req=status_values_by_req,
         ),
