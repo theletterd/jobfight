@@ -1,4 +1,5 @@
-import datetime
+from datetime import date
+from datetime import datetime
 
 from collections import defaultdict
 from functools import partial
@@ -11,10 +12,11 @@ from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.template import RequestContext
 
-from reporting.constants import ReportDataType, ReportRangeType
+from reporting.constants import Resolution, ReportDataType, ReportRangeType
 from reporting.forms import ReportTypeForm, StatusValueForm
 from reporting import logic
 from reporting import models
+from reporting import timeutil
 
 def home(request):
     return render_to_response(
@@ -42,6 +44,11 @@ def report(request):
     else:
         report_type_form = ReportTypeForm(dict(report_type=default_report_type))
 
+    edit_date = timeutil.default_today()
+    if report_range_type['resolution'] == Resolution.WEEKLY:
+        start_date, end_date = logic.range_from_report_range_type(report_range_type)
+        edit_date = logic.pick_day_from_week(start_date, end_date)
+
     user_status_matrix = logic.get_matrix(ReportDataType.USER_STATUS, report_range_type)
     req_status_matrix = logic.get_matrix(ReportDataType.REC_STATUS, report_range_type, user__id__exact=user.id)
 
@@ -56,6 +63,7 @@ def report(request):
             user_status_matrix=user_status_matrix,
             req_status_matrix=req_status_matrix,
 
+            edit_date=edit_date,
             report_type_form=report_type_form,
         ),
         context_instance=RequestContext(request)
@@ -95,16 +103,15 @@ def new_status_value(request):
     if request.method != "POST":
         return redirect('/reporting/report')
     post_data = request.POST
-    print post_data
     user = request.user
+
     status = models.Status.objects.get(id=post_data['status_id'])
     req = models.Requisition.objects.get(id=post_data['req_id'])
+    edit_date = datetime.strptime(post_data['edit_date'], "%Y-%m-%d").date()
 
-    print status
-    print req
     value = post_data['value']
 
-    status_value = models.StatusValue(user=user, req=req, status=status, value=value, date=datetime.date.today())
+    status_value = models.StatusValue(user=user, req=req, status=status, value=value, date=edit_date)
 
     status_value.save()
     return redirect('/reporting/report')

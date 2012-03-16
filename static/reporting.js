@@ -29,6 +29,7 @@ $(document).ready(function() {
 		$.post('/reporting/new_status_value', {
 			status_id: parent_node.getAttribute('status_id'),
 			req_id: parent_node.getAttribute('req_id'),
+            edit_date: $("#edit-date")[0].value,
 			value: value
 		 });
 		$(this).parent()[0].innerHTML = value;
