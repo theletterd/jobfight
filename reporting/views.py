@@ -23,7 +23,7 @@ def report(request):
 
     users = User.objects.all()
     reqs = user.get_profile().requisitions.all()
-    statuses = models.Status.objects.all().order_by("name")
+    statuses = models.Status.objects.all().order_by()
 
     status_values = models.StatusValue.objects.all()
 
