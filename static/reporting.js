@@ -10,6 +10,9 @@ $(document).ready(function() {
 		reqBoard.slideToggle('slow');
 	});
 
+	$('#id_report_type').change(function(e) {
+		$('#report-type').submit();
+	});
 
 	var entries = $('.req-entry');
 	$.each(entries, function(index, entry) {

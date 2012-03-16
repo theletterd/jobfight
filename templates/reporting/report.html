@@ -6,11 +6,10 @@
 {% endblock head %}
 
 {% block content %}
-      <form method="post">
+      <form id="report-type" method="post">
         {% csrf_token %}
         {{ report_type_form.as_p }}
-        <input type="submit" value="Submit" />
-      </form>
+     </form>
 
 	<div class="my-summary">
 	  <table>
