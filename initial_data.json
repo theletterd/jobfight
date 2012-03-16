@@ -518,8 +518,8 @@
     "model": "auth.user",
     "fields": {
       "username": "kylem",
-      "first_name": "",
-      "last_name": "",
+      "first_name": "Kyle",
+      "last_name": "Morrison",
       "is_active": true,
       "is_superuser": true,
       "is_staff": true,
@@ -536,8 +536,8 @@
     "model": "auth.user",
     "fields": {
       "username": "duncan",
-      "first_name": "",
-      "last_name": "",
+      "first_name": "Duncan",
+      "last_name": "Cook",
       "is_active": true,
       "is_superuser": true,
       "is_staff": true,
@@ -554,8 +554,8 @@
     "model": "auth.user",
     "fields": {
       "username": "tianyu",
-      "first_name": "",
-      "last_name": "",
+      "first_name": "Tianyu",
+      "last_name": "Liu",
       "is_active": true,
       "is_superuser": true,
       "is_staff": true,
@@ -572,8 +572,8 @@
     "model": "auth.user",
     "fields": {
       "username": "ashleykb",
-      "first_name": "",
-      "last_name": "",
+      "first_name": "Ashley",
+      "last_name": "King-Bischof",
       "is_active": true,
       "is_superuser": true,
       "is_staff": true,
@@ -583,6 +583,171 @@
       "password": "sha1$88950$f1e161e926c0262c71ee74479b7be028e7fdb537",
       "email": "",
       "date_joined": "2012-03-15 16:31:46"
+    }
+  },
+ {
+    "pk": 1,
+    "model": "reporting.statusvalue",
+    "fields": {
+      "status": 1,
+      "date": "2012-03-15",
+      "req": 1,
+      "user": 1,
+      "value": 10
+    }
+  },
+  {
+    "pk": 2,
+    "model": "reporting.statusvalue",
+    "fields": {
+      "status": 1,
+      "date": "2012-03-15",
+      "req": 1,
+      "user": 2,
+      "value": 12
+    }
+  },
+  {
+    "pk": 3,
+    "model": "reporting.statusvalue",
+    "fields": {
+      "status": 4,
+      "date": "2012-03-15",
+      "req": 3,
+      "user": 3,
+      "value": 2
+    }
+  },
+  {
+    "pk": 4,
+    "model": "reporting.statusvalue",
+    "fields": {
+      "status": 6,
+      "date": "2012-03-15",
+      "req": 5,
+      "user": 4,
+      "value": 100
+    }
+  },
+  {
+    "pk": 5,
+    "model": "reporting.statusvalue",
+    "fields": {
+      "status": 3,
+      "date": "2012-03-15",
+      "req": 8,
+      "user": 2,
+      "value": 42
+    }
+  },
+  {
+    "pk": 6,
+    "model": "reporting.statusvalue",
+    "fields": {
+      "status": 3,
+      "date": "2012-03-15",
+      "req": 8,
+      "user": 3,
+      "value": 54
+    }
+  },
+  {
+    "pk": 7,
+    "model": "reporting.statusvalue",
+    "fields": {
+      "status": 7,
+      "date": "2012-03-15",
+      "req": 8,
+      "user": 3,
+      "value": 54
+    }
+  },
+  {
+    "pk": 8,
+    "model": "reporting.statusvalue",
+    "fields": {
+      "status": 4,
+      "date": "2012-03-15",
+      "req": 4,
+      "user": 4,
+      "value": 4
+    }
+  },
+  {
+    "pk": 9,
+    "model": "reporting.statusvalue",
+    "fields": {
+      "status": 1,
+      "date": "2012-03-15",
+      "req": 8,
+      "user": 4,
+      "value": 14
+    }
+  },
+  {
+    "pk": 1,
+    "model": "reporting.userprofile",
+    "fields": {
+      "user": 1,
+      "requisitions": [
+        1,
+        2,
+        3,
+        4,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "pk": 2,
+    "model": "reporting.userprofile",
+    "fields": {
+      "user": 2,
+      "requisitions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "pk": 3,
+    "model": "reporting.userprofile",
+    "fields": {
+      "user": 3,
+      "requisitions": [
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "pk": 4,
+    "model": "reporting.userprofile",
+    "fields": {
+      "user": 4,
+      "requisitions": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
     }
   }
 ]
