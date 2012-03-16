@@ -29,7 +29,6 @@ def get_matrix(report_data_type, report_range_type, **filter_kwargs):
     # (subtract_arg), and c) the range to derive from that new date
     # (range_function)
     start_date, end_date = range_function(subtract_function(subtract_arg))
-    print start_date, end_date
     matrix_args['start_date'] = start_date
     matrix_args['end_date'] = end_date
     matrix_args.update(filter_kwargs)
