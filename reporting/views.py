@@ -100,25 +100,6 @@ def add_status_value(request):
 
 @login_required
 @csrf_exempt
-def new_status_value(request):
-    if request.method != "POST":
-        return redirect('/reporting/report')
-    post_data = request.POST
-    user = request.user
-
-    status = models.Status.objects.get(id=post_data['status_id'])
-    req = models.Requisition.objects.get(id=post_data['req_id'])
-    edit_date = datetime.strptime(post_data['edit_date'], "%Y-%m-%d").date()
-
-    value = post_data['value']
-
-    status_value = models.StatusValue(user=user, req=req, status=status, value=value, date=edit_date)
-
-    status_value.save()
-    return redirect('/reporting/report')
-
-@login_required
-@csrf_exempt
 def ajax_status_value(request):
     if request.method != "POST":
         return redirect('/reporting/report')
@@ -132,7 +113,8 @@ def ajax_status_value(request):
     print req
     value = post_data['value']
 
-    status_value = models.StatusValue(user=user, req=req, status=status, value=value, date=datetime.date.today())
+	edit_date = datetime.strptime(post_data['edit_date'], "%Y-%m-%d").date()
+    status_value = models.StatusValue(user=user, req=req, status=status, value=value, date=edit_date)
 
     status_value.save()
 
