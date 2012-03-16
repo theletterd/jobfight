@@ -39,27 +39,28 @@
 		  <tr>
 			<td>{{ req }}</td>
 			{% for status in statuses %}
-              <td>
-              {% if req_status_matrix|lookup:req|lookup:status %}
-                 {{ req_status_matrix|lookup:req|lookup:status }}
-              {% else %}
-                    0
-              {% endif %}
-              </td>
+
+			<td class="req-entry" status_id="{{status.id}}" req_id="{{req.id}}">
+			  {% if req_status_matrix|lookup:req|lookup:status %}
+			  {{ req_status_matrix|lookup:req|lookup:status }}
+			  {% else %}
+			  0
+			  {% endif %}
+			</td>
 			{% endfor %}
 		  </tr>
 		  {% endfor %}
 		</tbody>
 	  </table>
 	</div>
-	
+
 	<div id="req">
 	  <span id="req-text">hide requisitions</span> [<a id="see-by-req" href="#">+</a>]
 	</div>
 
 	<div class="req-board">
 	</div>
-	
+
 	<div class="team-board">
 	  <h2>team stats</h2>
 	  <table>
