@@ -113,7 +113,7 @@ def ajax_status_value(request):
     print req
     value = post_data['value']
 
-	edit_date = datetime.strptime(post_data['edit_date'], "%Y-%m-%d").date()
+    edit_date = datetime.strptime(post_data['edit_date'], "%Y-%m-%d").date()
     status_value = models.StatusValue(user=user, req=req, status=status, value=value, date=edit_date)
 
     status_value.save()
