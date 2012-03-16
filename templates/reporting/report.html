@@ -27,6 +27,25 @@
 	</div>
 	
 	<div class="team-board">
+	  <table>
+		<tr>
+		  <th>Recruiter</th>
+		  {% for status in statuses %}
+		  <th>{{ status }}</th>
+		  {% endfor %}
+		</tr>
+
+		{% for user in users %}
+		<tr>
+		  <td>{{ user.username }}</td>
+		  {% for status in statuses %}
+		  <td>
+			{{ user_status_matrix.user.status }}
+		  </td>
+		  {% endfor %}
+		</tr>
+		{% endfor %}
+	  </table>
 	</div>
 
 {% endblock content %}

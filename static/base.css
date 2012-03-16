@@ -1,5 +1,6 @@
 body div {
 	margin: 10px 0;
+	width: 800px;
 }
 
 div#headliner{
@@ -12,6 +13,7 @@ div#headliner{
 }
 
 div#account {
+	width: 200px;
 	float: right;
 }
 
@@ -23,7 +25,7 @@ body {
 
 div.my-summary {
 	background-color: #c3ccdd;
-	width: 700px;
+	width: 800px;
 }
 
 div.my-summary td {
@@ -38,4 +40,24 @@ div.my-summary th {
 	text-align: center;
 	color: #666;
 	font-size: 20px;
+}
+
+div.team-board {
+	padding: 20px 0;
+	background-color: #fff;
+	height: 400px;
+}
+
+div.team-board th, td {
+	font-size: 10px;
+	text-align: center;
+	color: #666;
+	width: 100px;
+	overflow: hidden;
+}
+
+div.team-board table {
+	cellspacing = "40";
+	cellpadding = "5";
+	word-wrap: break-word;
 }

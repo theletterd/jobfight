@@ -35,11 +35,12 @@ def report(request):
     user_status_matrix = defaultdict(partial(defaultdict, int))
     for status_value in status_values:
         status_values_by_user_id.setdefault(status_value.user.id, []).append(status_value)
-        user_status_matrix[status_value.user.id][status_value.status.id] += 1
+        user_status_matrix[status_value.user][status_value.status] += 1
 
     return render_to_response(
         'reporting/report.html',
         dict(
+			users=users,
             statuses=statuses,
             user_status_matrix=user_status_matrix,
             status_values_by_user_id=status_values_by_user_id,
