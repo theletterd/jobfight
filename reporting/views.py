@@ -10,9 +10,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.template import RequestContext
-from forms import StatusValueForm
 
 from reporting.constants import ReportDataType, ReportRangeType
+from reporting.forms import StatusValueForm
 from reporting import logic
 from reporting import models
 
@@ -92,8 +92,15 @@ def new_status_value(request):
     print req
     value = post_data['value']
 
-
     status_value = models.StatusValue(user=user, req=req, status=status, value=value, date=datetime.date.today())
 
     status_value.save()
     return redirect('/reporting/report')
+
+@login_required
+@csrf_exempt
+def new_range_view(request):
+    if request.method != "POST":
+        return redirect('/reporting/report')
+    post_data = request.POST
+    print post_data

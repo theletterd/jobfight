@@ -54,6 +54,12 @@ class ReportRangeType(object):
             subtract_arg=1,
     )
 
+    @classmethod
+    def all_types(cls):
+        # Hack to return all exposed values
+        return [attr for attr in dir(cls) if not attr.startswith('_') and attr != 'all_types']
+
+
 class ReportDataType(object):
     USER_STATUS = dict(
             i_key='user',
