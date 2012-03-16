@@ -20,25 +20,22 @@ def home(request):
 @login_required
 def report(request):
     user = request.user
-    users = User.objects.all()
 
+    users = User.objects.all()
     reqs = user.get_profile().requisitions.all()
     statuses = models.Status.objects.all().order_by("name")
 
     status_values = models.StatusValue.objects.all()
 
-    status_values_by_req = {}
-    for status_value in status_values:
-        status_values_by_req.setdefault(status_value.req, []).append(status_value)
-
-    status_values_by_user = {}
+    # Populate matrix values
     user_status_matrix = defaultdict(partial(defaultdict, int))
     req_status_matrix = defaultdict(partial(defaultdict, int))
     for status_value in status_values:
-        status_values_by_user.setdefault(status_value.user, []).append(status_value)
-        user_status_matrix[status_value.user][status_value.status] += 1
+        user_status_matrix[status_value.user][status_value.status] += status_value.value
+
+        # Populate req matrix only if it's by the current user
         if status_value.user.id == user.id:
-            req_status_matrix[status_value.req][status_value.status] += 1
+            req_status_matrix[status_value.req][status_value.status] += status_value.value
 
     return render_to_response(
         'reporting/report.html',
@@ -47,10 +44,9 @@ def report(request):
 			users=users,
 			reqs=reqs,
             statuses=statuses,
+
             user_status_matrix=user_status_matrix,
             req_status_matrix=req_status_matrix,
-            status_values_by_user=status_values_by_user,
-            status_values_by_req=status_values_by_req,
         ),
         context_instance=RequestContext(request)
     )

@@ -24,7 +24,7 @@ class StatusValue(models.Model):
         return '%s - %s %s %s - %s' % (self.user.username, self.status.name, self.value, self.req.name, self.date.strftime('%Y-%m-%d'))
 
 class UserProfile(models.Model):
-    requisitions = models.ManyToManyField(Requisition, related_name="requisitions")
+    requisitions = models.ManyToManyField(Requisition, related_name="user_profiles")
     user = models.ForeignKey(User, unique=True)
 
     def __unicode__(self):
