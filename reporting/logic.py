@@ -19,4 +19,3 @@ def matrix_for_daterange(start_date, end_date, i_key, j_key, filters=None):
         matrix[getattr(status_value, i_key)][getattr(status_value, j_key)] += status_value.value
 
     return matrix
-
