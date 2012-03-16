@@ -4,6 +4,10 @@ body {
 	padding: 10px 20px;
 }
 
+form select {
+	margin-left: 5px;
+}
+
 div.my-summary,
 div#my-board {
 	background-color: #c3ccdd;
