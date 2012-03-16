@@ -1,5 +1,5 @@
 div.my-summary,
-div.my-board {
+div#my-board {
 	background-color: #c3ccdd;
 	width: 800px;
 }
@@ -19,12 +19,12 @@ div.my-summary th {
 	font-size: 20px;
 }
 
-div.my-board {
+div#my-board {
 	text-align: center;
 	color:#666;
 }
 
-div.my-board th {
+div#my-board th {
 	width: 200px;
 	font-size: 11px;
 }
