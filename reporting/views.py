@@ -12,6 +12,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.template import RequestContext
+from django.utils import simplejson
 
 from reporting.constants import Resolution, ReportDataType, ReportRangeType
 from reporting.forms import ReportTypeForm, StatusValueForm
@@ -111,20 +112,22 @@ def ajax_status_value(request):
 
     print status
     print req
-    value = post_data['value']
-
-    edit_date = datetime.strptime(post_data['edit_date'], "%Y-%m-%d").date()
-    status_value = models.StatusValue(user=user, req=req, status=status, value=value, date=edit_date)
-
-    status_value.save()
+    value = int(post_data['value'])
 
     report_range_type = getattr(ReportRangeType, post_data['report_type'])
     req_status_matrix = logic.get_matrix(ReportDataType.REC_STATUS, report_range_type, user__id__exact=user.id)
-    value = req_status_matrix[req][status]
+    initial_value = req_status_matrix[req][status]
 
-    response_dict = dict(
-        value=req_status_matrix[req][status],
-        success=True,
-    )
+    response = dict(value=initial_value)
+    if value <= initial_value or report_range_type['resolution'] != Resolution.WEEKLY:
+        print 8888, initial_value
+        return HttpResponse(initial_value)
 
-    return HttpResponse('%d' % value)
+    new_value = value - initial_value
+    edit_date = datetime.strptime(post_data['edit_date'], "%Y-%m-%d").date()
+    status_value = models.StatusValue(user=user, req=req, status=status, value=new_value, date=edit_date)
+    status_value.save()
+
+    response['value'] = new_value
+    print 9999, value
+    return HttpResponse(value)

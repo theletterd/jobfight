@@ -19,19 +19,16 @@ $(document).ready(function() {
 		$(entry).click(function (event) {
 			var value = entry.innerText;
 			entry.innerText = '';
-			$(entry).append('<input class="wat" type="text" value="' + value + '"/>');
+			$(entry).append('<input class="wat" type="text" default_value="' + value + '" value="' + value + '"/>');
 			$(entry).children()[0].focus();
 		});
 	});
 
-	var curValue = undefined;
 	$('input.wat').live("blur", function(e) {
 		// submit something
-		if (curValue === undefined) {
-			var node = $(this)[0];
-			curValue = node.value;
-		}
-		$(this).parent()[0].innerHTML = curValue;
+        var node = $(this)[0];
+
+		$(this).parent()[0].innerHTML = node.value;
 	});
 
 	$('input.wat').live("keypress", function(e) {
@@ -53,7 +50,7 @@ $(document).ready(function() {
 				'type': 'POST',
 				'data': postData,
 				'success': function(response) {
-					curValue = response;
+                    node.value = response;
 					parent_node.innerHTML = response;
 				}
 			});
