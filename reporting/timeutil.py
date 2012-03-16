@@ -18,10 +18,6 @@ def weeks_ago(num_weeks, day=None):
     day = default_today(day)
     return day - timedelta(weeks=num_weeks)
 
-def make_it_friday(day, ahead=True):
-    day_num = day.date
-    weekday = day.weekday()
-
 def get_month_from_day(day):
     day_of_month = day.day
     start_date = day + timedelta(days=(1 - day_of_month))
