@@ -17,7 +17,7 @@ urlpatterns = patterns(
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     url(r'^login/$', auth_views.login, dict(template_name='registration/login.html', extra_context=dict(pagename="Login")), name='auth_login'),
     url(r'^logout/$', auth_views.logout, dict(template_name='registration/logout.html', extra_context=dict(pagename="Logout")), name='auth_logout'),
-    url(r'^$', 'reporting.views.home', name='home'),
+    url(r'^$', 'reporting.views.report', name='home'),
     url(r'^reporting/', include('reporting.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
