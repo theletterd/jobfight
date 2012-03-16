@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.template import RequestContext
@@ -64,7 +65,7 @@ def report(request):
 
 @login_required
 def add_status_value(request):
-
+	# this is bs
     template = 'reporting/add_status_value.html'
 
     if request.method == "GET":
@@ -108,3 +109,34 @@ def new_status_value(request):
 
     status_value.save()
     return redirect('/reporting/report')
+
+@login_required
+@csrf_exempt
+def ajax_status_value(request):
+    if request.method != "POST":
+        return redirect('/reporting/report')
+    post_data = request.POST
+    print post_data
+    user = request.user
+    status = models.Status.objects.get(id=post_data['status_id'])
+    req = models.Requisition.objects.get(id=post_data['req_id'])
+
+    print status
+    print req
+    value = post_data['value']
+
+    status_value = models.StatusValue(user=user, req=req, status=status, value=value, date=datetime.date.today())
+
+    status_value.save()
+
+    default_report_type = 'THIS_WEEK'
+    report_range_type = getattr(ReportRangeType, default_report_type)
+    req_status_matrix = logic.get_matrix(ReportDataType.REC_STATUS, report_range_type, user__id__exact=user.id)
+    value = req_status_matrix[req][status]
+
+    response_dict = dict(
+        value=req_status_matrix[req][status],
+        success=True,
+    )
+
+    return HttpResponse('%d' % value)

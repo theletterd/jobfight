@@ -28,27 +28,42 @@ $(document).ready(function() {
 		// submit something
 		var node = $(this)[0];
 		var value = node.value;
-		parent_node = $(this).parent()[0];
-		$.post('/reporting/new_status_value', {
-			status_id: parent_node.getAttribute('status_id'),
-			req_id: parent_node.getAttribute('req_id'),
-			value: value
-		 });
-		$(this).parent()[0].innerHTML = value;
+		var parent_node = $(this).parent()[0];
+
+		var postData = {
+			'status_id': parent_node.getAttribute('status_id'),
+			'req_id': parent_node.getAttribute('req_id'),
+			'value': value
+		}
+		$.ajax({
+		    'url': '/reporting/ajax_status_value',
+			'type': 'POST',
+			'data': postData,
+			'success': function(response) {
+				parent_node.innerHTML = response;
+			}
+		});
 	});
 
 	$('input.wat').live("keypress", function(e) {
 		if (e.keyCode == 13 ) {
 		var node = $(this)[0];
 		var value = node.value;
-		parent_node = $(this).parent()[0];
-		$.post('/reporting/new_status_value', {
-			status_id: parent_node.getAttribute('status_id'),
-			req_id: parent_node.getAttribute('req_id'),
-			value: value
-		 });
-		$(this).parent()[0].innerHTML = value;
+		var parent_node = $(this).parent()[0];
 
+		var postData = {
+			'status_id': parent_node.getAttribute('status_id'),
+			'req_id': parent_node.getAttribute('req_id'),
+			'value': value
+		};
+		$.ajax({
+		    'url': '/reporting/ajax_status_value',
+			'type': 'POST',
+			'data': postData,
+			'success': function(response) {
+				parent_node.innerHTML = response;
+			}
+		});
 		}
 	});
 });
