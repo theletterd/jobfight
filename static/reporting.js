@@ -33,8 +33,9 @@ $(document).ready(function() {
 		var postData = {
 			'status_id': parent_node.getAttribute('status_id'),
 			'req_id': parent_node.getAttribute('req_id'),
-			'value': value
-		}
+			'value': value,
+			'edit_date': $("#edit-date")[0].value
+		};
 		$.ajax({
 		    'url': '/reporting/ajax_status_value',
 			'type': 'POST',
@@ -54,7 +55,8 @@ $(document).ready(function() {
 		var postData = {
 			'status_id': parent_node.getAttribute('status_id'),
 			'req_id': parent_node.getAttribute('req_id'),
-			'value': value
+			'value': value,
+			'edit_date': $("#edit-date")[0].value
 		};
 		$.ajax({
 		    'url': '/reporting/ajax_status_value',
