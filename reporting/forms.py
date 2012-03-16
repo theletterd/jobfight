@@ -23,9 +23,11 @@ class StatusValueForm(ModelForm):
         req_choices = profile.requisitions.values_list('id', 'name')
         self.fields['req'].choices = req_choices
 
-class ReportType(forms.Form):
+class ReportTypeForm(forms.Form):
     report_type = forms.TypedChoiceField(
             coerce=partial(getattr, ReportRangeType),
             empty_value=None,
-            choices=dict((type, textutil.title_case_var(type)) for type in ReportRangeType.all_types()),
+            #choices=ReportRangeType.all_types(),
+            #choices=dict((type, textutil.title_case_var(type)) for type in ReportRangeType.all_types()),
+            choices=[(type, textutil.title_case_var(type)) for type in ReportRangeType.all_types()],
     )

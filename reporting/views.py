@@ -12,7 +12,7 @@ from django.shortcuts import redirect
 from django.template import RequestContext
 
 from reporting.constants import ReportDataType, ReportRangeType
-from reporting.forms import StatusValueForm
+from reporting.forms import ReportTypeForm, StatusValueForm
 from reporting import logic
 from reporting import models
 
@@ -31,9 +31,19 @@ def report(request):
     reqs = user.get_profile().requisitions.all()
     statuses = models.Status.objects.all().order_by()
 
-    status_values = models.StatusValue.objects.all()
-    user_status_matrix = logic.get_matrix(ReportDataType.USER_STATUS, ReportRangeType.THIS_WEEK)
-    req_status_matrix = logic.get_matrix(ReportDataType.REC_STATUS, ReportRangeType.THIS_WEEK, user__id__exact=user.id)
+    default_report_type = 'THIS_WEEK'
+    report_range_type = getattr(ReportRangeType, default_report_type)
+
+    # I tried to avoid handling POSTs here, but it was late and I was tired
+    if request.method == 'POST':
+        report_type_form = ReportTypeForm(request.POST)
+        if report_type_form.is_valid():
+            report_range_type = report_type_form.cleaned_data['report_type']
+    else:
+        report_type_form = ReportTypeForm(dict(report_type=default_report_type))
+
+    user_status_matrix = logic.get_matrix(ReportDataType.USER_STATUS, report_range_type)
+    req_status_matrix = logic.get_matrix(ReportDataType.REC_STATUS, report_range_type, user__id__exact=user.id)
 
     return render_to_response(
         'reporting/report.html',
@@ -45,6 +55,8 @@ def report(request):
 
             user_status_matrix=user_status_matrix,
             req_status_matrix=req_status_matrix,
+
+            report_type_form=report_type_form,
         ),
         context_instance=RequestContext(request)
     )
@@ -96,11 +108,3 @@ def new_status_value(request):
 
     status_value.save()
     return redirect('/reporting/report')
-
-@login_required
-@csrf_exempt
-def new_range_view(request):
-    if request.method != "POST":
-        return redirect('/reporting/report')
-    post_data = request.POST
-    print post_data
