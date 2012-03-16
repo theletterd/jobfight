@@ -48,6 +48,7 @@ div#req {
 
 div.team-board {
 	background-color: #fff;
+	padding-bottom: 10px;
 }
 
 div.team-board h2 {
@@ -65,3 +66,6 @@ div.team-board th, td {
 	overflow: hidden;
 }
 
+input.wat {
+    width: 40px;
+}
