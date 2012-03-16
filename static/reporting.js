@@ -36,25 +36,27 @@ $(document).ready(function() {
 
 	$('input.wat').live("keypress", function(e) {
 		if (e.keyCode == 13 ) {
-		var node = $(this)[0];
-		var value = node.value;
-		var parent_node = $(this).parent()[0];
+			var node = $(this)[0];
+			var value = node.value;
+			var parent_node = $(this).parent()[0];
+			var report_type = $('#id_report_type').val();
 
-		var postData = {
-			'status_id': parent_node.getAttribute('status_id'),
-			'req_id': parent_node.getAttribute('req_id'),
-			'value': value,
-			'edit_date': $("#edit-date")[0].value
-		};
-		$.ajax({
-		    'url': '/reporting/ajax_status_value',
-			'type': 'POST',
-			'data': postData,
-			'success': function(response) {
-				curValue = response;
-				parent_node.innerHTML = response;
-			}
-		});
+			var postData = {
+				'status_id': parent_node.getAttribute('status_id'),
+				'req_id': parent_node.getAttribute('req_id'),
+				'value': value,
+				'edit_date': $("#edit-date")[0].value,
+				'report_type': report_type
+			};
+			$.ajax({
+				'url': '/reporting/ajax_status_value',
+				'type': 'POST',
+				'data': postData,
+				'success': function(response) {
+					curValue = response;
+					parent_node.innerHTML = response;
+				}
+			});
 		}
 	});
 });

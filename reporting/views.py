@@ -118,8 +118,7 @@ def ajax_status_value(request):
 
     status_value.save()
 
-    default_report_type = 'THIS_WEEK'
-    report_range_type = getattr(ReportRangeType, default_report_type)
+    report_range_type = getattr(ReportRangeType, post_data['report_type'])
     req_status_matrix = logic.get_matrix(ReportDataType.REC_STATUS, report_range_type, user__id__exact=user.id)
     value = req_status_matrix[req][status]
 
