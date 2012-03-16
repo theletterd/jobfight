@@ -1,57 +1,7 @@
-from collections import defaultdict, namedtuple
+from collections import defaultdict
 from functools import partial
 
 from reporting import models
-from reporting import timeutil
-
-class Resolution(object):
-    WEEKLY = dict(
-            range_function=timeutil.get_week_from_day,
-            subtract_function=timeutil.weeks_ago,
-    )
-
-    MONTHLY = dict(
-            range_function=timeutil.get_month_from_day,
-            subtract_function=timeutil.months_ago,
-    )
-
-class ReportRangeType(object):
-    THIS_WEEK = dict(
-            resolution=Resolution.WEEKLY,
-            subtract_arg=0,
-    )
-    LAST_WEEK = dict(
-            resolution=Resolution.WEEKLY,
-            subtract_arg=1,
-    )
-    TWO_WEEKS_AGO = dict(
-            resolution=Resolution.WEEKLY,
-            subtract_arg=2,
-    )
-
-    THIS_MONTH = dict(
-            resolution=Resolution.MONTHLY,
-            subtract_arg=0,
-    )
-    LAST_MONTH = dict(
-            resolution=Resolution.MONTHLY,
-            subtract_arg=1,
-    )
-    TWO_MONTHS_AGO = dict(
-            resolution=Resolution.MONTHLY,
-            subtract_arg=2,
-    )
-
-class ReportDataType(object):
-    USER_STATUS = dict(
-            i_key='user',
-            j_key='status',
-    )
-
-    REC_STATUS = dict(
-            i_key='user',
-            j_key='status',
-    )
 
 def matrix_for_daterange(start_date, end_date, i_key, j_key, **filter_kwargs):
     status_values_query = models.StatusValue.objects
@@ -79,6 +29,7 @@ def get_matrix(report_data_type, report_range_type, **filter_kwargs):
     # (subtract_arg), and c) the range to derive from that new date
     # (range_function)
     start_date, end_date = range_function(subtract_function(subtract_arg))
+    print start_date, end_date
     matrix_args['start_date'] = start_date
     matrix_args['end_date'] = end_date
     matrix_args.update(filter_kwargs)

@@ -12,8 +12,8 @@ from django.shortcuts import redirect
 from django.template import RequestContext
 from forms import StatusValueForm
 
+from reporting.constants import ReportDataType, ReportRangeType
 from reporting import logic
-from reporting.logic import ReportDataType, ReportRangeType
 from reporting import models
 
 def home(request):
@@ -32,8 +32,8 @@ def report(request):
     statuses = models.Status.objects.all().order_by()
 
     status_values = models.StatusValue.objects.all()
-    user_status_matrix = logic.get_matrix(ReportDataType.USER_STATUS, ReportRangeType.LAST_MONTH)
-    req_status_matrix = logic.get_matrix(ReportDataType.REC_STATUS, ReportRangeType.LAST_MONTH, user__id__exact=user.id)
+    user_status_matrix = logic.get_matrix(ReportDataType.USER_STATUS, ReportRangeType.THIS_WEEK)
+    req_status_matrix = logic.get_matrix(ReportDataType.REC_STATUS, ReportRangeType.THIS_WEEK, user__id__exact=user.id)
 
     return render_to_response(
         'reporting/report.html',
