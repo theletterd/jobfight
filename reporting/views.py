@@ -27,14 +27,14 @@ def report(request):
     #status_values = models.StatusValue.objects.filter(user=user)
     status_values = models.StatusValue.objects.all()
 
-    status_values_by_req_id = {}
+    status_values_by_req = {}
     for status_value in status_values:
-        status_values_by_req_id.setdefault(status_value.req.id, []).append(status_value)
+        status_values_by_req.setdefault(status_value.req, []).append(status_value)
 
-    status_values_by_user_id = {}
+    status_values_by_user = {}
     user_status_matrix = defaultdict(partial(defaultdict, int))
     for status_value in status_values:
-        status_values_by_user_id.setdefault(status_value.user.id, []).append(status_value)
+        status_values_by_user.setdefault(status_value.user, []).append(status_value)
         user_status_matrix[status_value.user][status_value.status] += 1
 
     return render_to_response(
@@ -43,8 +43,8 @@ def report(request):
 			users=users,
             statuses=statuses,
             user_status_matrix=user_status_matrix,
-            status_values_by_user_id=status_values_by_user_id,
-            status_values_by_req_id=status_values_by_req_id,
+            status_values_by_user=status_values_by_user,
+            status_values_by_req=status_values_by_req,
         ),
         context_instance=RequestContext(request)
     )
