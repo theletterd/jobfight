@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}homepage.css" />
+{% endblock head %}
+
 {% block content %}
   <div> this is the homepage, right?</div>
-  <div> here is a message: {{ message }} </dic>
+  <div> here is a message: {{ message }} </div>
 {% endblock content %}

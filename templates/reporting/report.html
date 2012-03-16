@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% load filters %}
 
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}reporting.css" />
+{% endblock head %}
+
 {% block content %}
 
 	<div class="my-summary">
 	  <table>
 		<tr>
-		  <th>my stats</th>
+		  <td class="summary-label">my<br>stats</td>
 		  {% for status in statuses %}
           <td>
           {% if user_status_matrix|lookup:user|lookup:status %}
@@ -17,23 +21,19 @@
           </td>
 		  {% endfor %}
 		</tr>
-	  </table>
-	</div>
-
-	<div id="req">
-	  see by requisition [<a id="see-by-req" href="#">+</a>]
-	</div>
-
-	<div id="my-board">
-	  <table>
-		<thead>
+		<tfoot>
 		  <tr>
 			<th></th>
 			{% for status in statuses %}
                 <th>{{ status }}</th>
 			{% endfor %}
 		  </tr>
-		</thead>
+		</tfoot>
+	  </table>
+	</div>
+
+	<div id="my-board">
+	  <table>
 		<tbody>
 		  {% for req in reqs %}
 		  <tr>
@@ -53,14 +53,19 @@
 	  </table>
 	</div>
 	
+	<div id="req">
+	  <span id="req-text">hide requisitions</span> [<a id="see-by-req" href="#">+</a>]
+	</div>
+
 	<div class="req-board">
 	</div>
 	
 	<div class="team-board">
+	  <h2>team stats</h2>
 	  <table>
 		<thead>
 		  <tr>
-			<th>Recruiter</th>
+			<th></th>
 			{% for status in statuses %}
 			<th>{{ status }}</th>
 			{% endfor %}

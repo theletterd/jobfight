@@ -1,6 +1,6 @@
 body div {
 	margin: 10px 0;
-	width: 800px;
+	width: 900px;
 }
 
 div#headliner{
@@ -18,7 +18,17 @@ div#account {
 }
 
 body {
-	background: url("/static/images/duncan.png") no-repeat fixed right bottom #666;
+	background: url("/static/images/kb.png") no-repeat fixed right bottom #666;
 	font-family: 'Armata', sans-serif;
-	padding: 10px 30px;
+	padding: 10px 20px;
+}
+
+table {
+	word-wrap: break-word;
+	margin-bottom: 10px;
+}
+
+th, td {
+	width: 100px;
+	color: #666;
 }

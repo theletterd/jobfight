@@ -1,49 +1,63 @@
+body {
+	background: url("/static/images/duncan.png") no-repeat fixed right bottom #666;
+	font-family: 'Armata', sans-serif;
+	padding: 10px 20px;
+}
+
 div.my-summary,
 div#my-board {
 	background-color: #c3ccdd;
-	width: 800px;
+}
+
+div.my-summary {
+	margin-bottom: 0;
+}
+
+div#my-board {
+	margin-top: 0;
 }
 
 div.my-summary td {
 	font-size: 60px;
 	text-align: center;
-	color: #666;
-	width: 200px;
 }
 
-div.my-summary th {
-	width: 80px;
-	font-size: 80px;
+div.my-summary td.summary-label {
 	text-align: center;
-	color: #666;
 	font-size: 20px;
+	color: #f660ab;
+}
+
+div.my-summary tfoot th {
+	padding-bottom: 5px;
+	font-size: 11px;
 }
 
 div#my-board {
 	text-align: center;
-	color:#666;
+	color: #666;
 }
 
-div#my-board th {
-	width: 200px;
-	font-size: 11px;
+div#req {
+	font-size: 15px;
 }
 
 div.team-board {
-	padding: 20px 0;
 	background-color: #fff;
+}
+
+div.team-board h2 {
+	margin: 0;
+	padding: 15px 20px 10px;
+	color: #666;
+	font-size: 20px;
+	color: #f660ab;
+	font-weight: normal;
 }
 
 div.team-board th, td {
 	font-size: 10px;
 	text-align: center;
-	color: #666;
-	width: 100px;
 	overflow: hidden;
 }
 
-div.team-board table {
-	cellspacing = "40";
-	cellpadding = "5";
-	word-wrap: break-word;
-}
