@@ -24,26 +24,14 @@ $(document).ready(function() {
 		});
 	});
 
-	$('input.wat').live("blur", function() {
+	var curValue = undefined;
+	$('input.wat').live("blur", function(e) {
 		// submit something
-		var node = $(this)[0];
-		var value = node.value;
-		var parent_node = $(this).parent()[0];
-
-		var postData = {
-			'status_id': parent_node.getAttribute('status_id'),
-			'req_id': parent_node.getAttribute('req_id'),
-			'value': value,
-			'edit_date': $("#edit-date")[0].value
-		};
-		$.ajax({
-		    'url': '/reporting/ajax_status_value',
-			'type': 'POST',
-			'data': postData,
-			'success': function(response) {
-				parent_node.innerHTML = response;
-			}
-		});
+		if (curValue === undefined) {
+			var node = $(this)[0];
+			curValue = node.value;
+		}
+		$(this).parent()[0].innerHTML = curValue;
 	});
 
 	$('input.wat').live("keypress", function(e) {
@@ -63,6 +51,7 @@ $(document).ready(function() {
 			'type': 'POST',
 			'data': postData,
 			'success': function(response) {
+				curValue = response;
 				parent_node.innerHTML = response;
 			}
 		});
