@@ -6,11 +6,34 @@
 	  <table>
 		<tr>
 		  <th>my stats</th>
+		  {% for status in statuses %}
+		  <td>{{ user_status_matrix.user.status }}</td>
+		  {% endfor %}
 		</tr>
 	  </table>
 	</div>
 
 	<div class="my-board">
+	  <table>
+		<thead>
+		  <tr>
+			<th></th>
+			{% for status in statuses %}
+			<th>{{ status }}</th>
+			{% endfor %}
+		  </tr>
+		</thead>
+		<tbody>
+		  {% for req in reqs %}
+		  <tr>
+			<td>{{ req }}</td>
+			{% for status in statuses %}
+			<td>{{ req_status_matrix.req.status }}</td>
+			{% endfor %}
+		  </tr>
+		  {% endfor %}
+		</tbody>
+	  </table>
 	</div>
 	
 	<div id="req">
@@ -22,23 +45,27 @@
 	
 	<div class="team-board">
 	  <table>
-		<tr>
-		  <th>Recruiter</th>
-		  {% for status in statuses %}
-		  <th>{{ status }}</th>
-		  {% endfor %}
-		</tr>
+		<thead>
+		  <tr>
+			<th>Recruiter</th>
+			{% for status in statuses %}
+			<th>{{ status }}</th>
+			{% endfor %}
+		  </tr>
+		</thead>
 
-		{% for user in users %}
-		<tr>
-		  <td>{{ user.username }}</td>
-		  {% for status in statuses %}
-		  <td>
-			{{ user_status_matrix.user.status }}
-		  </td>
+		<tbody>
+		  {% for user in users %}
+		  <tr>
+			<td>{{ user.username }}</td>
+			{% for status in statuses %}
+			<td>
+			  {{ user_status_matrix.user.status }}
+			</td>
+			{% endfor %}
+		  </tr>
 		  {% endfor %}
-		</tr>
-		{% endfor %}
+		</tbody>
 	  </table>
 	</div>
 

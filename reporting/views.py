@@ -22,6 +22,7 @@ def report(request):
     user = request.user
     users = User.objects.all()
 
+    reqs = models.Requisition.objects.all()
     statuses = models.Status.objects.all().order_by("name")
 
     #status_values = models.StatusValue.objects.filter(user=user)
@@ -43,7 +44,9 @@ def report(request):
     return render_to_response(
         'reporting/report.html',
         dict(
+			user=user,
 			users=users,
+			reqs=reqs,
             statuses=statuses,
             user_status_matrix=user_status_matrix,
             req_status_matrix=req_status_matrix,
