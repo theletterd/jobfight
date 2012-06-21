@@ -105,13 +105,10 @@ def ajax_status_value(request):
     if request.method != "POST":
         return redirect('/reporting/report')
     post_data = request.POST
-    print post_data
     user = request.user
     status = models.Status.objects.get(id=post_data['status_id'])
     req = models.Requisition.objects.get(id=post_data['req_id'])
 
-    print status
-    print req
     value = int(post_data['value'])
 
     report_range_type = getattr(ReportRangeType, post_data['report_type'])
@@ -120,7 +117,6 @@ def ajax_status_value(request):
 
     response = dict(value=initial_value)
     if value <= initial_value or report_range_type['resolution'] != Resolution.WEEKLY:
-        print 8888, initial_value
         return HttpResponse(initial_value)
 
     new_value = value - initial_value
@@ -129,5 +125,4 @@ def ajax_status_value(request):
     status_value.save()
 
     response['value'] = new_value
-    print 9999, value
     return HttpResponse(value)
