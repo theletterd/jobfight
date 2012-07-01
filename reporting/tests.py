@@ -79,3 +79,34 @@ class TimeutilTestCase(TestCase):
                 timeutil.months_ahead(13, december_first_year_before),
                 new_years_day
         )
+
+    def test_quarters_ago(self):
+        last_quarter = datetime.date(year=self.CURRENT_YEAR, month=self.CURRENT_MONTH - 3, day=self.CURRENT_DAY)
+        self.assertEqual(
+                timeutil.quarters_ago(1, self.today),
+                last_quarter
+        )
+
+        next_quarter = datetime.date(year=self.CURRENT_YEAR, month=self.CURRENT_MONTH + 3, day=self.CURRENT_DAY)
+        self.assertEqual(
+                timeutil.quarters_ago(-1, self.today),
+                next_quarter
+        )
+
+        new_years_day = datetime.date(year=self.CURRENT_YEAR, month=1, day=1)
+        self.assertEqual(
+                timeutil.quarters_ago(-1, new_years_day),
+                datetime.date(year=self.CURRENT_YEAR, month=4, day=1)
+        )
+        self.assertEqual(
+                timeutil.quarters_ago(1, new_years_day),
+                datetime.date(year=self.CURRENT_YEAR - 1, month=10, day=1)
+        )
+        self.assertEqual(
+                timeutil.quarters_ago(2, new_years_day),
+                datetime.date(year=self.CURRENT_YEAR - 1, month=7, day=1)
+        )
+        self.assertEqual(
+                timeutil.quarters_ago(3, new_years_day),
+                datetime.date(year=self.CURRENT_YEAR - 1, month=4, day=1)
+        )

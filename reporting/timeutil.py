@@ -69,4 +69,4 @@ def get_quarter_from_day(day):
 
 def quarters_ago(num_quarters, day=None):
     day = default_today(day)
-    return months_ago(num_quarters*3)
+    return months_ago(num_quarters*3, day=day)
