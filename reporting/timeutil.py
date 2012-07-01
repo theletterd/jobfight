@@ -37,10 +37,13 @@ def months_ago(num_months, day=None):
     month_num = (day.month - num_months)
     year_num = day.year
 
-    year_num += month_num / 12
-    month_num %= 12
-    if month_num == 0:
-        month_num = 12
+    while month_num < 1 or month_num > 12:
+        if month_num < 1:
+            year_num -= 1
+            month_num += 12
+        else:
+            year_num += 1
+            month_num -= 12
 
     try:
         ret_date = day.replace(year=year_num, month=month_num)
