@@ -46,6 +46,24 @@ class TimeutilTestCase(TestCase):
                 next_week,
         )
 
+    def get_month_from_day(self):
+        self.assertEqual(
+                timeutil.get_month_from_day(datetime.date(2012, 12, 15)),
+                (datetime.date(2012, 12, 1), datetime.date(2012, 12, 31))
+        )
+        self.assertEqual(
+                timeutil.get_month_from_day(datetime.date(2012, 11, 30)),
+                (datetime.date(2012, 11, 1), datetime.date(2012, 11, 30))
+        )
+        self.assertEqual(
+                timeutil.get_month_from_day(datetime.date(2012, 11, 1)),
+                (datetime.date(2012, 11, 1), datetime.date(2012, 11, 30))
+        )
+        self.assertEqual(
+                timeutil.get_month_from_day(datetime.date(2012, 2, 4)),
+                (datetime.date(2012, 2, 1), datetime.date(2012, 2, 29))
+        )
+
     def test_months_ago(self):
         last_month = datetime.date(year=self.CURRENT_YEAR, month=self.CURRENT_MONTH - 1, day=self.CURRENT_DAY)
         self.assertEqual(
